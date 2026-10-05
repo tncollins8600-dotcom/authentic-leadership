@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>What Makes a Leader Authentic?</title>
+<style>
+:root{--ink:#181818;--cream:#f5f0e6;--stone:#ddd6ca;--gold:#a98243;--muted:#666}
+*{box-sizing:border-box} body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#fff;color:var(--ink)}
+main{max-width:760px;margin:0 auto;padding:28px 18px 44px;text-align:center}
+h1{font-size:clamp(26px,5vw,40px);margin:0 0 8px} .sub{color:var(--muted);margin:0 0 18px}
+.wrap{max-width:500px;margin:auto;position:relative}.pointer{font-size:32px;color:var(--gold);line-height:1;margin-bottom:-9px;position:relative;z-index:2}
+svg{width:100%;height:auto;display:block}.rotor{transform-origin:210px 210px}
+.actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:20px}
+button{min-height:46px;border-radius:999px;padding:0 28px;font-weight:800;font-size:15px;cursor:pointer}
+#spin{background:var(--ink);color:white;border:1px solid var(--ink)}#reset{background:white;color:var(--ink);border:1px solid #bbb}
+button:disabled{opacity:.55;cursor:not-allowed}button:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.result{max-width:610px;margin:22px auto 0;border-top:3px solid var(--gold);padding:17px 8px 0;min-height:120px}
+.kicker{font-size:12px;font-weight:800;letter-spacing:.14em;color:#80632f}.result h2{margin:5px 0 7px;font-size:25px}.result p{line-height:1.5;margin:5px 0}
+.count{font-size:13px;color:var(--muted);margin-top:12px}
+@media(max-width:430px){main{padding-left:10px;padding-right:10px}svg text{font-size:10px}}
+</style>
+</head>
+<body>
+<main>
+<h1>What Makes a Leader Authentic?</h1>
+<p class="sub">Spin the wheel to explore ideas connected to authentic leadership.</p>
+<div class="wrap">
+<div class="pointer" aria-hidden="true">▼</div>
+<svg viewBox="0 0 420 420" role="img" aria-label="Authentic leadership concept wheel">
+<g id="rotor" class="rotor">
+<circle cx="210" cy="210" r="196" fill="#f5f0e6" stroke="#181818" stroke-width="5"/>
+<path d="M210 210 L210 14 A196 196 0 0 1 348.6 71.4 Z" fill="#f5f0e6" stroke="#181818" stroke-width="1.5"/>
+<path d="M210 210 L348.6 71.4 A196 196 0 0 1 406 210 Z" fill="#ddd6ca" stroke="#181818" stroke-width="1.5"/>
+<path d="M210 210 L406 210 A196 196 0 0 1 348.6 348.6 Z" fill="#f5f0e6" stroke="#181818" stroke-width="1.5"/>
+<path d="M210 210 L348.6 348.6 A196 196 0 0 1 210 406 Z" fill="#ddd6ca" stroke="#181818" stroke-width="1.5"/>
+<path d="M210 210 L210 406 A196 196 0 0 1 71.4 348.6 Z" fill="#f5f0e6" stroke="#181818" stroke-width="1.5"/>
+<path d="M210 210 L71.4 348.6 A196 196 0 0 1 14 210 Z" fill="#ddd6ca" stroke="#181818" stroke-width="1.5"/>
+<path d="M210 210 L14 210 A196 196 0 0 1 71.4 71.4 Z" fill="#f5f0e6" stroke="#181818" stroke-width="1.5"/>
+<path d="M210 210 L71.4 71.4 A196 196 0 0 1 210 14 Z" fill="#ddd6ca" stroke="#181818" stroke-width="1.5"/>
+<g fill="#181818" font-size="11.5" font-weight="800" text-anchor="middle">
+<text x="274" y="64" transform="rotate(22.5 274 64)">SELF-AWARENESS</text>
+<text x="356" y="146" transform="rotate(67.5 356 146)">TRANSPARENCY</text>
+<text x="356" y="279" transform="rotate(112.5 356 279)">VALUES</text>
+<text x="274" y="360" transform="rotate(157.5 274 360)">ETHICS</text>
+<text x="146" y="360" transform="rotate(202.5 146 360)">TRUST</text>
+<text x="64" y="279" transform="rotate(247.5 64 279)">DECISIONS</text>
+<text x="64" y="146" transform="rotate(292.5 64 146)">FEEDBACK</text>
+<text x="146" y="64" transform="rotate(337.5 146 64)">CONSISTENCY</text>
+</g>
+<circle cx="210" cy="210" r="61" fill="#181818" stroke="#a98243" stroke-width="4"/>
+<text x="210" y="202" text-anchor="middle" fill="#fff" font-size="12" font-weight="800">AUTHENTIC</text>
+<text x="210" y="221" text-anchor="middle" fill="#fff" font-size="12" font-weight="800">LEADERSHIP</text>
+</g></svg>
+</div>
+<div class="actions"><button id="spin">SPIN</button><button id="reset">RESET</button></div>
+<section id="result" class="result" aria-live="polite"><p style="color:#666">Spin the wheel to begin.</p></section>
+<p id="count" class="count">0 of 8 concepts explored</p>
+</main>
+<script>
+const rotor=document.getElementById('rotor'),spin=document.getElementById('spin'),reset=document.getElementById('reset'),result=document.getElementById('result'),count=document.getElementById('count');
+const items=[
+{name:'TRUST',note:'Followers are more likely to trust leaders when their words, values, and behavior consistently align.',idx:4},
+{name:'FEEDBACK',note:'Authentic leaders are willing to hear information about themselves, even when the feedback is uncomfortable.',idx:6},
+{name:'VALUES',note:'Values matter when leaders use them to guide choices, especially when doing so is difficult.',idx:2},
+{name:'SELF-AWARENESS',note:'Authentic leadership begins with understanding your strengths, limitations, emotions, values, and impact on other people.',idx:0},
+{name:'DECISION-MAKING',note:'Authentic leaders consider relevant information fairly, including viewpoints that challenge what they already believe.',idx:5},
+{name:'TRANSPARENCY',note:'Transparency means presenting yourself genuinely to others. It does not mean sharing every private thought or feeling.',idx:1},
+{name:'ETHICS',note:'Authentic leaders use internal moral standards and values to guide behavior instead of simply following outside pressure.',idx:3},
+{name:'CONSISTENCY',note:'Followers notice whether a leader’s actions repeatedly match the principles and values the leader claims to hold.',idx:7}
+];
+let turn=0,rotation=0,busy=false;
+function desiredAngle(idx){const center=22.5+idx*45;return 360-center}
+function finishAll(){result.innerHTML='<div class="kicker">THE RESEARCH NARROWS IT DOWN</div><h2>Four Core Components</h2><p>Self-awareness, relational transparency, balanced processing, and internalized moral perspective.</p><p><strong>Now let’s look at what authentic leadership actually means.</strong></p>'}
+spin.addEventListener('click',()=>{
+ if(busy)return;
+ if(turn>=items.length){finishAll();return}
+ busy=true;spin.disabled=true;spin.textContent='SPINNING…';
+ const item=items[turn],desired=desiredAngle(item.idx),mod=((rotation%360)+360)%360,delta=((desired-mod)+360)%360;
+ rotation+=1440+delta;
+ const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+ rotor.style.transition=reduced?'none':'transform 3.2s cubic-bezier(.12,.68,.12,1)';
+ rotor.style.transform=`rotate(${rotation}deg)`;
+ const done=()=>{
+  result.innerHTML=`<div class="kicker">CONCEPT ${turn+1}</div><h2>${item.name}</h2><p>${item.note}</p>`;
+  turn++;count.textContent=`${turn} of 8 concepts explored`;spin.disabled=false;spin.textContent=turn===items.length?'SEE THE REVEAL':'SPIN AGAIN';busy=false;
+ };
+ reduced?done():setTimeout(done,3250);
+});
+reset.addEventListener('click',()=>{turn=0;rotation=0;busy=false;rotor.style.transition='none';rotor.style.transform='rotate(0deg)';spin.disabled=false;spin.textContent='SPIN';result.innerHTML='<p style="color:#666">Spin the wheel to begin.</p>';count.textContent='0 of 8 concepts explored'});
+</script>
+</body></html>
